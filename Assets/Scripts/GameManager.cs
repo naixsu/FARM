@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameState state;
     public static event Action<GameState> OnStateChange;
 
+    [SerializeField] private MouseController mouseController;
+
     private void Awake()
     {
         if (instance == null)
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
     private void HandleMouseControl()
     {
         Debug.Log("GM: Mouse Control");
+        mouseController.gameObject.SetActive(true);
     }
 
     private void HandlePlantSeeds()
