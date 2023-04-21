@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 669ceaa46f3f1b3489b9f1c42b920847
+guid: 922770bf76ac0634d94bfd9eb9ed7a62
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,8 +45,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.499}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Iso_Seed_2_0
+      name: Iso_Stone_0
       rect:
         serializedVersion: 2
         x: 16
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2612f66f04b3eb34898ae9baf9cf06ed
-      internalID: -1795287683
+      spriteID: 8bd64384d8db29d43b93b946bf704b5e
+      internalID: -1290098303
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Iso_Seed_2_0: -1795287683
+      Iso_Stone_0: -1290098303
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

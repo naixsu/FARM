@@ -135,16 +135,16 @@ MonoBehaviour:
   previous: {fileID: 0}
   gridLocation: {x: 0, y: 0, z: 0}
   overlayTile: {fileID: -1050469304, guid: 1e5d3ee7afcb5f342b0419a479732f34, type: 3}
-  plantedSprite: {fileID: -118301689, guid: de4618b0c4c22794c88747988d294f81, type: 3}
-  blocked: {fileID: -1547144227, guid: b758203c4f1828d4e9a293691e575f07, type: 3}
-  grass: {fileID: -1233027440, guid: 6c4131fcc365e7b498ad088792e1e7e5, type: 3}
-  till: {fileID: 1874587880, guid: 51bd25081e9a6e24f8ba067f80b58042, type: 3}
-  growth1: {fileID: -2007075849, guid: aa59dc29f32a8d449b66d82f78c72a8a, type: 3}
-  growth2: {fileID: -1795287683, guid: 669ceaa46f3f1b3489b9f1c42b920847, type: 3}
-  growth3: {fileID: 1818885286, guid: 0308aff6693a2f44d9b3d3eae3f6f756, type: 3}
-  growth4: {fileID: 945774133, guid: e8fa40e0a38ce4e4898da86fc4a4b87a, type: 3}
-  harvested: {fileID: -1731023672, guid: c2fe6b95c6553f04a8253941b3a96b54, type: 3}
-  plantGrowthTimer: 0
+  plantedSprite: {fileID: -703703995, guid: 6e5958c6e7dfb2d41be47673e11d73e9, type: 3}
+  blocked: {fileID: -1290098303, guid: 922770bf76ac0634d94bfd9eb9ed7a62, type: 3}
+  grass: {fileID: 1215191514, guid: 144494ff251f814489d55fd9ea5a8994, type: 3}
+  till: {fileID: 290550418, guid: 8cf10799238a17a428b736983e5b5258, type: 3}
+  growth1: {fileID: -192675029, guid: 8e189f46083817643a1142523ddf3da9, type: 3}
+  growth2: {fileID: 2140875792, guid: 82e7b46bf3a768b43a7a564d913085b5, type: 3}
+  growth3: {fileID: 221502383, guid: dba719fbf62f4b947af015b6003f0883, type: 3}
+  growth4: {fileID: -33378812, guid: 1c415f914de159c46a9fa55b79aa75f4, type: 3}
+  harvested: {fileID: -1007562788, guid: fd3ad5978b0c91849b5ffac54eb03fa4, type: 3}
+  plantGrowthTimer: 2
   isTilled: 0
   hasSeed: 0
   isFullGrown: 0

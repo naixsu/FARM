@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e8fa40e0a38ce4e4898da86fc4a4b87a
+guid: dba719fbf62f4b947af015b6003f0883
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,8 +45,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.499}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Iso_Seed_4_0
+      name: Iso_Seed_3_0
       rect:
         serializedVersion: 2
         x: 16
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a60e3bc7670f5543b6d9ca3738b2101
-      internalID: 945774133
+      spriteID: 5e859d3d1e39fbc48890a41170cb972a
+      internalID: 221502383
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Iso_Seed_4_0: 945774133
+      Iso_Seed_3_0: 221502383
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
