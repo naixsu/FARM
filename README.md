@@ -1,6 +1,6 @@
 # Isometric version of [F.A.R.M.](https://github.com/naixsu/CMSC170)
 
-Backend is basically the same from the original, only difference is that it's now isometric *wooooahhh*. By no means is the code optimized. Almost everything is spaghetti code :D
+Backend is basically the same from the original, only difference is that it now supports isometric tiles *wooooahhh*. By no means is the code optimized. Almost everything is spaghetti code :D
 
 ## Play the game [here](https://naixsu.itch.io/farm-v2?secret=PsuNLwegE5psZ7PzkxgX45KOM).
 
