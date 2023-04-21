@@ -1,6 +1,6 @@
 # Isometric version of F.A.R.M. 
+
 Link to the original [here](https://github.com/naixsu/CMSC170)
----
 
 ## Resources used
 - Making the [grid](https://www.youtube.com/watch?v=kkAjpQAM-jE) by [Tarodev](https://www.youtube.com/@Tarodev).
