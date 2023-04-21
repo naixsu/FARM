@@ -61,12 +61,12 @@ public class MapManager : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         _camera.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - scroll * zoomSpeed, minZoom, maxZoom);
 
-        // Move the camera using mouse3
+        /*// Move the camera using mouse3
         if (Input.GetMouseButton(2))
         {
             Vector3 move = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f) * cameraMoveSpeed;
             transform.position += move;
-        }
+        }*/
     }
 
     void SetUp()
