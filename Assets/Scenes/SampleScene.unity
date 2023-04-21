@@ -1541,9 +1541,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseController: {fileID: 282286808}
-  waitTime: 0.5
+  waitTime: 0.2
   range: 1
-  speed: 3
+  speed: 4
   plantingState: 0
   harvestingState: 0
   isMoving: 0
@@ -2373,9 +2373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseController: {fileID: 282286808}
-  waitTime: 3
+  waitTime: 1
   range: 1
-  speed: 3
+  speed: 4
   plantingState: 0
   harvestingState: 0
   isMoving: 0
@@ -2383,6 +2383,9 @@ MonoBehaviour:
   path: []
   tilledTiles: []
   inRangeTiles: []
+  checkRange: 1
+  checkTileFound: 0
+  _checkInRangeTiles: []
 --- !u!4 &2031600779
 Transform:
   m_ObjectHideFlags: 0

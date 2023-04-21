@@ -345,7 +345,7 @@ public class HarvestManager : MonoBehaviour
         // using Unity's builtin MoveTowards() function
         // that takes in the villager's current position, the first element of the path list
         // aka where the villager is going, and a step, aka the speed with regards to time
-        villager.transform.position = Vector2.MoveTowards(villager.transform.position, path[0].transform.position, step);
+        villager.transform.position = Vector3.MoveTowards(villager.transform.position, path[0].transform.position, step);
 
         // aligns the villager's position according to the path's position, aka its center
         if (Vector2.Distance(villager.transform.position, path[0].transform.position) < 0.001f)

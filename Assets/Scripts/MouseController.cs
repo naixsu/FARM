@@ -448,7 +448,7 @@ public class MouseController : MonoBehaviour
 
     public void PositionCharacterOnTile(OverlayTile tile)
     {
-        villager.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y - 0.05f, tile.transform.position.z+1);
+        villager.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z+1);
         // villager.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder + 5;
         villager.activeTile = tile;
     }

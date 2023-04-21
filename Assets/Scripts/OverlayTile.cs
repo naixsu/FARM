@@ -88,6 +88,20 @@ public class OverlayTile : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
     }
 
+    public void _HighlightTileFade()
+    {
+        Transform childTransform = transform.GetChild(0);
+        childTransform.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 0.5f);
+        childTransform.gameObject.SetActive(true);
+    }
+
+    public void _HighlightTile()
+    {   
+        Transform childTransform = transform.GetChild(0);
+        childTransform.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 0.75f);
+        childTransform.gameObject.SetActive(true);
+    }
+
     public void HighlightTile()
     {
         Transform childTransform = transform.GetChild(0);
