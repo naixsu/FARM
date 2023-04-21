@@ -13,7 +13,7 @@ Backend is basically the same from the original, only difference is that it's no
 - [Villager](https://github.com/naixsu/FARM/blob/main/Assets/Sprites/Villager_2.png) and [Tiles](https://github.com/naixsu/FARM/tree/main/Assets/Sprites/Tiles) Sprites by [me](https://github.com/naixsu) using [Aseprite](https://www.aseprite.org/).
 - [Wheat Seed](https://github.com/naixsu/FARM/blob/main/Assets/Sprites/Buttons/WheatSeeds.png), [Diamond Pickaxe](https://github.com/naixsu/FARM/blob/main/Assets/Sprites/Buttons/DPickMC.png), and [Diamond Hoe](https://github.com/naixsu/FARM/blob/main/Assets/Sprites/Buttons/DHoeMC.png) buttons from the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Minecraft_Wiki).
 - [SFX](https://github.com/naixsu/FARM/tree/main/Assets/Audio) from the official [Minecraft](https://www.minecraft.net/en-us) `.minecraft/assets/objects` folder.
-- [My prized possession](https://github.com/naixsu/FARM/blob/main/Assets/Sprites/credits.png).
+- [My prized possession](https://raw.githubusercontent.com/naixsu/FARM/main/Assets/Sprites/credits.png).
 - Other images from Google Images.
 
 ### Let him cook
