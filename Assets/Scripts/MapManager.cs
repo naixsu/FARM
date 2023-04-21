@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,14 +12,15 @@ public class MapManager : MonoBehaviour
 
     public OverlayTile overlayTilePrefab;
     public GameObject overlayContainer;
+
     [SerializeField] private Tilemap tileMap;
 
     public Dictionary<Vector2Int, OverlayTile> map;
+
     [SerializeField] private Camera _camera;
     [SerializeField] private float _padding = 1f;
+    public bool ignoreBottomTiles;
 
-
-    #region GAME MANAGER
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,10 +32,11 @@ public class MapManager : MonoBehaviour
             instance = this;
         }
 
-        // GameManager.OnStateChange += GameManager_OnStateChange;
+        GameManager.OnStateChange += GameManager_OnStateChange;
+
     }
 
-    /*private void OnDestroy()
+    private void OnDestroy()
     {
         GameManager.OnStateChange -= GameManager_OnStateChange;
     }
@@ -44,100 +47,33 @@ public class MapManager : MonoBehaviour
         {
             SetUp();
         }
-    }*/
-
-    #endregion
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        // SetUp();
-        Stuff();
+        
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int cellPosition = tileMap.WorldToCell(mousePosition);
-            Debug.Log("Mouse clicked on cell: " + cellPosition);
-        }
-    }
-
-    void Stuff()
-    {
-        BoundsInt bounds = tileMap.cellBounds;
-
-        for (int z = bounds.max.z; z > bounds.min.z; z--)
-        {
-            for (int y = bounds.min.y; y < bounds.max.y; y++)
-            {
-                for (int x = bounds.min.x; x < bounds.max.x; x++)
-                {
-                    var tileLocation = new Vector3Int(x, y);
-
-                    if (tileMap.HasTile(tileLocation))
-                    {
-                        Debug.Log(tileLocation);
-                    }
-                    else
-                    {
-                        Debug.Log("no tile " + tileLocation);
-                    }
-
-                    /*if (tileMap.HasTile(tileLocation))
-                    {
-                        var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
-                        var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
-                        overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
-                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-                    }*/
-                }
-            }
-        }
-    }
-
-    private void SetUp()
+    void SetUp()
     {
         Debug.Log("Setting Up");
         // get a dictionary of all the tiles in the screen
         map = new Dictionary<Vector2Int, OverlayTile>();
 
-        //var tileMap = gameObject.GetComponentInChildren<Tilemap>();
-        var count = 0;
-
-        // the tilemap's bounds (position , size)
         BoundsInt bounds = tileMap.cellBounds;
 
-        for (int z = bounds.max.z; z > bounds.min.z; z--)
+        var count = 0;
+
+        for (int z = bounds.max.z; z >= bounds.min.z; z--)
         {
             for (int y = bounds.min.y; y < bounds.max.y; y++)
             {
                 for (int x = bounds.min.x; x < bounds.max.x; x++)
                 {
-                    var tileLocation = new Vector3Int(x, y, z);
+                    if (z == 0 && ignoreBottomTiles)
+                        return;
 
-                    if (tileMap.HasTile(tileLocation))
-                    {
-                        var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
-                        var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
-                        overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
-                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-
-
-                    }
-                }
-            }
-        }
-
-        // loop through our tiles and instantiate an overlay container
-        /*for(int z = bounds.max.z; z > bounds.min.z; z--)
-        {
-            for (int y = bounds.min.y; y < bounds.max.y; y++)
-            {
-                for (int x = bounds.min.x; x < bounds.max.x; x++)
-                {
                     var tileLocation = new Vector3Int(x, y, z);
                     var tileKey = new Vector2Int(x, y);
 
@@ -154,25 +90,21 @@ public class MapManager : MonoBehaviour
                         // assign the gameObject's position according to its tileMap position
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
                         // adjust the sprite's sorting order
-                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder + 1;
+                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
                         // assign its gridLocation to be used in pathfinding
-                        // overlayTile.gridLocation = tileLocation;
+                        overlayTile.gridLocation = tileLocation;
                         // add to dictionary
                         map.Add(tileKey, overlayTile);
                     }
                 }
             }
-        }*/
+        }
 
-
-        // try to center camera based on the tilemap's bounds
-        // need to make this function perfect
-        // ResizeCameraToMap(3f);
-
-
+        ResizeCameraToMap(3f);
         // switch GameState once setup is finished
         Debug.Log("Finished Setting Up");
-        // GameManager.instance.UpdateGameState(GameManager.GameState.MouseControl);
+        GameManager.instance.UpdateGameState(GameManager.GameState.MouseControl);
+
     }
 
     private void ResizeCameraToMap(float zoomOut = 0f)
@@ -185,6 +117,10 @@ public class MapManager : MonoBehaviour
         foreach (KeyValuePair<Vector2Int, OverlayTile> tile in map)
         {
             Vector3 tilePosition = tile.Value.transform.position;
+
+            // Adjust the tile position to account for the isometric grid
+            tilePosition.x = (tilePosition.x - tilePosition.y) / 2f;
+            tilePosition.y = (tilePosition.x + tilePosition.y) / 2f;
 
             if (tilePosition.x < bottomLeftCorner.x)
             {
@@ -219,8 +155,9 @@ public class MapManager : MonoBehaviour
         _camera.orthographicSize = cameraSize;
     }
 
-    
-    /*public List<OverlayTile> NewOrderGetNeighborTiles(OverlayTile currentOverlayTile)
+
+
+    public List<OverlayTile> NewOrderGetNeighborTiles(OverlayTile currentOverlayTile)
     {
 
         // list of neighboring tiles top, down, left, right, topleft, topright, downleft, downright
@@ -304,8 +241,8 @@ public class MapManager : MonoBehaviour
                 neighbors.Add(neighborTile);
             }
 
-            *//*if ((!topTile?.isBlocked ?? true) || (!leftTile?.isBlocked ?? true))
-                neighbors.Add(neighborTile);*//*
+            /*if ((!topTile?.isBlocked ?? true) || (!leftTile?.isBlocked ?? true))
+                neighbors.Add(neighborTile);*/
         }
 
         // left down
@@ -323,8 +260,8 @@ public class MapManager : MonoBehaviour
                 neighbors.Add(neighborTile);
             }
 
-            *//*if ((!bottomTile?.isBlocked ?? true) || (!leftTile?.isBlocked ?? true))
-                neighbors.Add(neighborTile);*//*
+            /*if ((!bottomTile?.isBlocked ?? true) || (!leftTile?.isBlocked ?? true))
+                neighbors.Add(neighborTile);*/
         }
 
         // down right
@@ -342,8 +279,8 @@ public class MapManager : MonoBehaviour
                 neighbors.Add(neighborTile);
             }
 
-            *//*if ((!bottomTile?.isBlocked ?? true) || (!rightTile?.isBlocked ?? true))
-                neighbors.Add(neighborTile);*//*
+            /*if ((!bottomTile?.isBlocked ?? true) || (!rightTile?.isBlocked ?? true))
+                neighbors.Add(neighborTile);*/
         }
 
         // right iop
@@ -361,12 +298,14 @@ public class MapManager : MonoBehaviour
                 neighbors.Add(neighborTile);
             }
 
-            *//*if ((!topTile?.isBlocked ?? true) || (!rightTile?.isBlocked ?? true))
-                neighbors.Add(neighborTile);*//*
+            /*if ((!topTile?.isBlocked ?? true) || (!rightTile?.isBlocked ?? true))
+                neighbors.Add(neighborTile);*/
         }
 
         #endregion
 
         return neighbors;
-    }*/
+    }
+
+
 }

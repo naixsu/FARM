@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverlayTile : MonoBehaviour
 {
-    /*#region PATHFINDING VARS
+    #region PATHFINDING VARS
     public int _G;
     public int _H;
     public int _F;
@@ -14,7 +14,7 @@ public class OverlayTile : MonoBehaviour
 
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
-    #endregion*/
+    #endregion
 
 
     [SerializeField] private Sprite overlayTile;
