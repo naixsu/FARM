@@ -19,6 +19,11 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] private Camera _camera;
     [SerializeField] private float _padding = 1f;
+    public float zoomSpeed;
+    public float minZoom;
+    public float maxZoom;
+    public float cameraMoveSpeed;
+
     public bool ignoreBottomTiles;
 
     private void Awake()
@@ -50,9 +55,18 @@ public class MapManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        // Zoom in and out using scroll wheel
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        _camera.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - scroll * zoomSpeed, minZoom, maxZoom);
+
+        // Move the camera using mouse3
+        if (Input.GetMouseButton(2))
+        {
+            Vector3 move = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f) * cameraMoveSpeed;
+            transform.position += move;
+        }
     }
 
     void SetUp()
