@@ -21,7 +21,7 @@ Backend is basically the same from the original, only difference is that it's no
 
 ![lethimcook](https://user-images.githubusercontent.com/95230510/233659723-8c279b95-d463-4891-9699-2858d8925938.jpg)
 
-~~*Mostly*~~ spam listened to this song while coding *again*.
+~~*Mostly*~~ spam listened to this song while coding.....*again*.
 
 <a href="https://www.youtube.com/watch?v=BctS652B2-g" target="_blank">
   <img src="https://user-images.githubusercontent.com/95230510/232323536-810c0753-f2fb-4dbf-8b19-ab5385d72af5.gif" alt="Shioriko GIF">
