@@ -6,7 +6,7 @@ Backend is basically the same from the original, only difference is that it's no
 ## Play the game [here](https://naixsu.itch.io/farm-v2?secret=PsuNLwegE5psZ7PzkxgX45KOM).
 
 ## Resources used
-- Making the [grid](https://www.youtube.com/watch?v=kkAjpQAM-jE) by [Tarodev](https://www.youtube.com/@Tarodev).
+- Making the [isometric tilemap](https://www.youtube.com/watch?v=ci1ba7jVLFw&t=295s) by [Lawless Games](https://www.youtube.com/@lawlessgames3844).
 - [OverlayTile, MapManager, CursorController](https://www.youtube.com/watch?v=riLtglHwoYw) by [Lawless Games](https://www.youtube.com/@lawlessgames3844).
 - [A* Pathfinding](https://www.youtube.com/@lawlessgames3844) by [Lawless Games](https://www.youtube.com/@lawlessgames3844) and [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm) from [Wikipedia](https://en.wikipedia.org/wiki/Main_Page).
 - [Range Display](https://www.youtube.com/watch?v=3cZ0tBuzlZs) by [Lawless Games](https://www.youtube.com/@lawlessgames3844).
