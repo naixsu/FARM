@@ -3,6 +3,8 @@
 #### Link to the original [here](https://github.com/naixsu/CMSC170)
 Backend is basically the same from the original, only difference is that it's now isometric *wooooahhh*.
 
+## Play the game [here](https://naixsu.itch.io/farm-v2?secret=PsuNLwegE5psZ7PzkxgX45KOM).
+
 ## Resources used
 - Making the [grid](https://www.youtube.com/watch?v=kkAjpQAM-jE) by [Tarodev](https://www.youtube.com/@Tarodev).
 - [OverlayTile, MapManager, CursorController](https://www.youtube.com/watch?v=riLtglHwoYw) by [Lawless Games](https://www.youtube.com/@lawlessgames3844).
