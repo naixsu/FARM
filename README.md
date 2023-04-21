@@ -1,6 +1,7 @@
 # Isometric version of F.A.R.M. 
 
-Link to the original [here](https://github.com/naixsu/CMSC170)
+#### Link to the original [here](https://github.com/naixsu/CMSC170)
+Backend is basically the same from the original, only difference is that it's now isometric *wooooahhh*.
 
 ## Resources used
 - Making the [grid](https://www.youtube.com/watch?v=kkAjpQAM-jE) by [Tarodev](https://www.youtube.com/@Tarodev).
@@ -13,3 +14,7 @@ Link to the original [here](https://github.com/naixsu/CMSC170)
 - [Credits](https://github.com/naixsu/CMSC170/blob/main/AI/Assets/Sprites/credits.png) by [me](https://github.com/naixsu).
 - Other images from Google Images.
 
+### Let him cook
+
+
+![lethimcook](https://user-images.githubusercontent.com/95230510/233659723-8c279b95-d463-4891-9699-2858d8925938.jpg)
