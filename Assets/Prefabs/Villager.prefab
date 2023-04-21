@@ -103,4 +103,4 @@ MonoBehaviour:
   plantingState: 0
   harvestingState: 0
   speed: 5
-  rangeWaitTime: 0.2
+  rangeWaitTime: 0.1
