@@ -7,11 +7,11 @@ public static class Loader
 {
     public enum Scene
     {
-        StartScene,
+        Start_Scene,
         GameScene_1,
         GameScene_2,
         GameScene_3,
-        EndScene
+        End_Scene
     }
     public static void Load(Scene scene)
     {

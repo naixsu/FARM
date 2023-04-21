@@ -55,7 +55,7 @@ public class OverlayTile : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = plantedSprite;
             coroutinePlantGrowth = StartCoroutine(PlantGrowth());
             Debug.Log("Planted seed at tile " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
-            // AudioManager.Instance.PlayRandomPlant();
+            AudioManager.Instance.PlayRandomPlant();
         }
     }
 
@@ -66,7 +66,7 @@ public class OverlayTile : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = harvested;
             this.isHarvested = true;
             Debug.Log("Harvested crop at tile " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
-            // AudioManager.Instance.PlayHarvest();
+            AudioManager.Instance.PlayHarvest();
         }
     }
 
@@ -128,7 +128,7 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Tilled tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = till;
             this.ShowTile(1f);
-            //if (!rand) AudioManager.Instance.PlayRandomTillTile();
+            if (!rand) AudioManager.Instance.PlayRandomTillTile();
         }
     }
 
@@ -140,7 +140,7 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Blocked tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = blocked;
             this.ShowTile(1f);
-            //if (!rand) AudioManager.Instance.PlayRandomPlaceBlock();
+            if (!rand) AudioManager.Instance.PlayRandomPlaceBlock();
         }
     }
 
@@ -151,7 +151,7 @@ public class OverlayTile : MonoBehaviour
             this.isBlocked = false;
             Debug.Log("Unblocked tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = grass;
-            //if (!rand) AudioManager.Instance.PlayRandomBreakBlock();
+            if (!rand) AudioManager.Instance.PlayRandomBreakBlock();
         }
     }
 
@@ -163,7 +163,7 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Untilled tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = grass;
             this.HideTile();
-            //if (!rand) AudioManager.Instance.PlayRandomUnTillTile();
+            if (!rand) AudioManager.Instance.PlayRandomUnTillTile();
         }
     }
 }

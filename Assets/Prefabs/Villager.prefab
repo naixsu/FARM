@@ -102,3 +102,5 @@ MonoBehaviour:
   activeTile: {fileID: 0}
   plantingState: 0
   harvestingState: 0
+  speed: 5
+  rangeWaitTime: 0.2

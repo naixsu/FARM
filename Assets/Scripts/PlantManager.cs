@@ -12,24 +12,22 @@ public class PlantManager : MonoBehaviour
     private RangeFinder rangeFinder;
     private Coroutine coroutine;
 
-    public float waitTime;
     public int range;
+    public bool notFirstRange;
 
-    public int speed;
     public bool plantingState;
     public bool harvestingState;
     public bool isMoving;
     public bool tileFound;
 
-
     public List<OverlayTile> path = new List<OverlayTile>();
     public List<OverlayTile> tilledTiles = new List<OverlayTile>();
     public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
-    public int checkRange;
-    public bool checkTileFound;
-    private List<OverlayTile> _checkPath = new List<OverlayTile>();
-    public List<OverlayTile> _checkInRangeTiles = new List<OverlayTile>();
+    public int numValidTilesFound;
+    public int newNumValidTilesFound;
+    public int maxRange;
+
 
     #region GAME MANAGER
     private void Awake()
@@ -55,18 +53,13 @@ public class PlantManager : MonoBehaviour
     {
         villager = mouseController.villager;
         range = 0;
-        checkRange = 0;
         pathFinder = new PathFinder();
         rangeFinder = new RangeFinder();
         tilledTiles = mouseController.tilledTiles;
         cropCountScript.cropValue = villager.crops;
-
+        maxRange = Mathf.CeilToInt(Mathf.Sqrt(MapManager.Instance.map.Count)) + 1;
         // start range detection
         GetInRangeTiles();
-        _GetInRangeTiles();
-        
-        
-        // CheckGetInRangeTiles();
     }
 
     private void Update()
@@ -78,7 +71,6 @@ public class PlantManager : MonoBehaviour
             CheckPlant();
             CheckMove();
         }
-
     }
 
     private void CheckPlant()
@@ -87,16 +79,16 @@ public class PlantManager : MonoBehaviour
         if (mouseController.villagerPlaced && villager.seeds == 0 && plantingState)
         {
             plantingState = false;
-            Debug.Log("All seeds have been planted");
+            //Debug.Log("All seeds have been planted");
             GameManager.instance.UpdateGameState(GameManager.GameState.HarvestSeeds);
         }
     }
 
     private IEnumerator AddRange()
     {
-        Debug.Log("Add range");
         // wait for waitTime seconds to perform the functions below
-        yield return new WaitForSeconds(waitTime);
+        numValidTilesFound = inRangeTiles.Count;
+        yield return new WaitForSeconds(villager.rangeWaitTime);
 
         // try and detect more tilled tiles by increasing the range in GetInRangeTiles()
         if (mouseController.tilledTiles.Count > 0 && !isMoving)
@@ -106,14 +98,50 @@ public class PlantManager : MonoBehaviour
         }
     }
 
-    private IEnumerator _AddRange()
-    {
-        yield return new WaitForSeconds(waitTime);
 
-        if (mouseController.tilledTiles.Count > 0 && !isMoving)
+    
+
+
+    private void HideHighlightRange()
+    {
+        foreach (var tile in inRangeTiles)
         {
-            checkRange++;
-            _GetInRangeTiles();
+            // more info in OverlayTile.cs/HideHighlightTile()
+            tile.HideHighlightTile();
+        }
+    }
+
+
+    private void GetInRangeTiles()
+    {
+        CheckValidPath();
+        tileFound = false;
+        // hides the Highlight gameObject under the overlayTile gameObject
+        HideHighlightRange();
+
+        // explained further in PathFinder.cs/GetTilesInRange()
+        inRangeTiles = rangeFinder.GetTilesInRange(villager.activeTile, range);
+
+        newNumValidTilesFound = inRangeTiles.Count - numValidTilesFound;
+
+        // looks for a tile in the list of inRangeTiles to plant on
+        RangeDetection();
+
+        // if tile is found:
+        // stop increasing the range in GetTilesInRange(), and
+        // stop looking for tilled tiles in range
+        if (tileFound)
+        {
+            //Debug.Log("Stop coroutine");
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+        }
+        // if tile is not found still:
+        // increase the range in GetTilesInRange(), and
+        // continue looking for tilled tiles in range
+        else if (!tileFound && !isMoving)
+        {
+            coroutine = StartCoroutine(AddRange());
         }
     }
 
@@ -121,28 +149,6 @@ public class PlantManager : MonoBehaviour
     {
         // reset the current inRangeTiles list to a new list
         inRangeTiles = new List<OverlayTile>();
-        _checkInRangeTiles = new List<OverlayTile>();
-    }
-
-    private void _RangeDetection()
-    {
-        foreach (var tile in _checkInRangeTiles)
-        {
-            if (!inRangeTiles.Contains(tile))
-            {
-                if (tile.isBlocked)
-                    tile._HighlightTileFade();
-                else
-                    tile._HighlightTile();
-
-                if (tile.isTilled && !tile.hasSeed)
-                {
-                    checkTileFound = true;
-                    _checkPath = pathFinder.FindPath(villager.activeTile, tile);
-                    break;
-                }
-            }
-        }
     }
 
     private void RangeDetection()
@@ -163,95 +169,34 @@ public class PlantManager : MonoBehaviour
         }
     }
 
-    private void _HideHighlightRange()
+    private IEnumerator GameOver()
     {
-        foreach (var tile in _checkInRangeTiles)
-        {
-            if (!inRangeTiles.Contains(tile))
-                tile.HideHighlightTile();
-        }
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.Instance.PlayHaggle();
+        GameManager.instance.UpdateGameState(GameManager.GameState.GameOver);
     }
-
-    private void HideHighlightRange()
+    private void CheckValidPath()
     {
-        foreach (var tile in inRangeTiles)
+        
+        if (newNumValidTilesFound == 0 && range > maxRange && !tileFound)
         {
-            // more info in OverlayTile.cs/HideHighlightTile()
-            tile.HideHighlightTile();
+            StopAllCoroutines();
+            StartCoroutine(GameOver());
         }
-    }
 
-    private void _GetInRangeTiles()
-    {
-        checkTileFound = false;
-        _HideHighlightRange();
-        _checkInRangeTiles = rangeFinder._TryGetInRange(villager.activeTile, checkRange);
-        _RangeDetection();
-        if (checkTileFound)
+        if (tileFound && path == null)
         {
-            Debug.Log("Stop coroutine");
-            if (coroutine != null)
-                StopCoroutine(coroutine);
+            StopAllCoroutines();
+            StartCoroutine(GameOver());
         }
-        else if (!checkTileFound && !isMoving)
-        {
-            coroutine = StartCoroutine(_AddRange());
-        }
-    }
-
-    private void GetInRangeTiles()
-    {
-        tileFound = false;
-        // hides the Highlight gameObject under the overlayTile gameObject
-        HideHighlightRange();
-
-        // explained further in PathFinder.cs/GetTilesInRange()
-        inRangeTiles = rangeFinder.GetTilesInRange(villager.activeTile, range);
-
-        // looks for a tile in the list of inRangeTiles to plant on
-        RangeDetection();
-
-        // if tile is found:
-        // stop increasing the range in GetTilesInRange(), and
-        // stop looking for tilled tiles in range
-        if (tileFound)
-        {
-            Debug.Log("Stop coroutine");
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-        }
-        // if tile is not found still:
-        // increase the range in GetTilesInRange(), and
-        // continue looking for tilled tiles in range
-        else if (!tileFound && !isMoving)
-        {
-            coroutine = StartCoroutine(AddRange());
-        }
-    }
-
-    private bool CheckValidPath()
-    {
-        if (checkTileFound && _checkPath == null)
-        {
-            Debug.Log("No possible path found");
-            HideHighlightRange();
-            _HideHighlightRange();
-            RemoveRange();
-            // AudioManager.Instance.PlayHaggle();
-            GameManager.instance.UpdateGameState(GameManager.GameState.GameOver);
-            return false;
-        }
-        return true;
     }
 
     private void CheckMove()
     {
-        if (!CheckValidPath()) return;
         // if the there is still a path from the pathfinding algo,
         // move towards the end tile
         if (path.Count > 0)
         {
-
             MoveAlongPath();
             isMoving = true;
         }
@@ -268,7 +213,6 @@ public class PlantManager : MonoBehaviour
 
             // hide highlight range and remove past range
             HideHighlightRange();
-            _HideHighlightRange();
             RemoveRange();
 
             // pop one tilled tile from the list
@@ -276,9 +220,7 @@ public class PlantManager : MonoBehaviour
 
             if (tilledTiles.Count > 0) // get new path
             {
-                Debug.Log("there are still " + tilledTiles.Count + " more tilled tiles");
                 GetInRangeTiles();
-                _GetInRangeTiles();   
             }
         }
 
@@ -297,16 +239,13 @@ public class PlantManager : MonoBehaviour
 
                 // hide highlight range and remove past range
                 HideHighlightRange();
-                _HideHighlightRange();
                 RemoveRange();
 
                 // pop one tilled tile from the list
                 tilledTiles.RemoveAt(0);
                 if (tilledTiles.Count > 0) // get new path
                 {
-                    Debug.Log("there are still " + tilledTiles.Count + " more tilled tiles");
                     GetInRangeTiles();
-                    _GetInRangeTiles();
                 }
             }
         }
@@ -315,7 +254,7 @@ public class PlantManager : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        var step = speed * Time.deltaTime;
+        var step = villager.speed * Time.deltaTime;
         // move the villager along the path generated by the A* algorithm
         // using Unity's builtin MoveTowards() function
         // that takes in the villager's current position, the first element of the path list

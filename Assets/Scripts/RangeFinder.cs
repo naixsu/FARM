@@ -5,39 +5,6 @@ using UnityEngine;
 
 public class RangeFinder
 {
-    public List<OverlayTile> _TryGetInRange(OverlayTile startingTile, int range)
-    {
-        // initialize
-        var inRangeTiles = new List<OverlayTile>();
-        // the range of tiles to get tiles in range
-        int stepCount = 0;
-        inRangeTiles.Add(startingTile);
-        var tileForPreviousStep = new List<OverlayTile>();
-        tileForPreviousStep.Add(startingTile);
-
-
-        // basically just get the neighboring tiles
-        // but range increases
-        // if range increases, the neighboring tiles of each neighbor will also be returned
-        // and so on
-        while (stepCount < range)
-        {
-            var neighborTiles = new List<OverlayTile>();
-
-            foreach (var neighborTile in tileForPreviousStep)
-            {
-                neighborTiles.AddRange(MapManager.Instance.PathNeighbors(neighborTile));
-            }
-
-            inRangeTiles.AddRange(neighborTiles);
-            tileForPreviousStep = neighborTiles.Distinct().ToList();
-
-            stepCount++;
-        }
-
-        // return a list of distinct tiles
-        return inRangeTiles.Distinct().ToList();
-    }
     public List<OverlayTile> GetTilesInRange(OverlayTile startingTile, int range)
     {
         // initialize

@@ -11,12 +11,14 @@ public class VillagerInfo : MonoBehaviour
     private OverlayTile _prevActiveTile;
     public bool plantingState;
     public bool harvestingState;
+    public float speed;
+    public float rangeWaitTime;
     // Start is called before the first frame update
     void Start()
     {
         seeds = 0;
         crops = 0;
-        // seeds = MapManager.Instance.map.Count;
+        seeds = MapManager.Instance.map.Count;
     }
 
     private void Update()
@@ -42,11 +44,11 @@ public class VillagerInfo : MonoBehaviour
     {
         if (_prevActiveTile.isTilled)
         {
-            //AudioManager.Instance.PlayRandomPlant();
+            AudioManager.Instance.PlayRandomPlant();
         }
         if (!_prevActiveTile.isTilled)
         {
-            //AudioManager.Instance.PlayRandomStep();
+            AudioManager.Instance.PlayRandomStep();
         }
     }
 
@@ -55,11 +57,11 @@ public class VillagerInfo : MonoBehaviour
         if (_prevActiveTile.isTilled && _prevActiveTile.hasSeed)
         {
             Debug.Log("here");
-            //AudioManager.Instance.PlayRandomPlant();
+            AudioManager.Instance.PlayRandomPlant();
         }
         if (!_prevActiveTile.isTilled)
         {
-            //AudioManager.Instance.PlayRandomStep();
+            AudioManager.Instance.PlayRandomStep();
         }
     }
 }

@@ -7,20 +7,12 @@ public class GameControl : MonoBehaviour
 {
     public void Retry()
     {
-        //Restarts current level
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        StartCoroutine(RetryLevel());
-        
+        StartCoroutine(RetryLevel());  
     }
 
     public void Quit()
     {
-        /*//Unity Editor
-        UnityEditor.EditorApplication.isPlaying = false;
-        //Standalone Game
-        Application.Quit();*/
-        StartCoroutine(QuitLevel());
-        
+        StartCoroutine(QuitLevel()); 
     }
 
     public void NextLevel()
@@ -68,7 +60,7 @@ public class GameControl : MonoBehaviour
     IEnumerator QuitLevel()
     {
         yield return new WaitForSeconds(0.1f);
-        Loader.Load(Loader.Scene.EndScene);
+        Loader.Load(Loader.Scene.End_Scene);
     }
     IEnumerator RetryLevel()
     {

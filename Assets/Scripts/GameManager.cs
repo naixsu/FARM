@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateGameState(GameState.SetUp);
-        // AudioManager.Instance.PlayRestart();
+        AudioManager.Instance.PlayRestart();
     }
 
     public void UpdateGameState(GameState newState)
@@ -69,14 +69,14 @@ public class GameManager : MonoBehaviour
     private void HandleEnd()
     {
         Debug.Log("GM: End");
-        //AudioManager.Instance.PlayEnd();
+        AudioManager.Instance.PlayEnd();
         finish.gameObject.SetActive(true);
         StartCoroutine(GoEnd());
     }
     IEnumerator GoEnd()
     {
         yield return new WaitForSeconds(3f);
-        //Loader.Load(Loader.Scene.EndScene);
+        Loader.Load(Loader.Scene.End_Scene);
     }
 
     private void HandleSetUp()
