@@ -7,6 +7,10 @@ public class MouseController : MonoBehaviour
 {
     private bool mouseControl;
 
+    public GameObject villagerPrefab;
+    public VillagerInfo villager;
+    public bool villagerButtonClicked;
+
     public Dictionary<Vector2Int, OverlayTile> map;
     public int seeds;
     public bool villagerPlaced = false;
@@ -38,6 +42,7 @@ public class MouseController : MonoBehaviour
     {
         map = MapManager.Instance.map;
         seeds = 0;
+        villagerButtonClicked = true;
     }
 
     private void Update()
@@ -56,6 +61,57 @@ public class MouseController : MonoBehaviour
                 transform.position = overlayTile.transform.position;
                 // adjust this sorting order
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+
+                #region VILLAGER BUTTON PRESS
+                if (Input.GetMouseButtonDown(1) && villagerButtonClicked)
+                {
+                    if (!villagerPlaced)
+                    {
+                        if (villager == null && !overlayTile.isBlocked)
+                        {
+                            // if the villager is not placed and there is no villager prefab in the scene,
+                            // instantiate the villager
+                            villager = Instantiate(villagerPrefab).GetComponent<VillagerInfo>();
+                            // basically positions the villager's transform.position according to the overlayTile's transform.position
+                            // set the villager's active tile to the overlayTile detected
+                            PositionCharacterOnTile(overlayTile);
+                            //AudioManager.Instance.PlayRandomVillagerIdleOnSpawn();
+                            villagerPlaced = true;
+                            //villagerButtonClicked = false;
+                        }
+                    }
+
+                    if (villagerPlaced)
+                    {
+                        if (!overlayTile.isBlocked)
+                        {
+                            PositionCharacterOnTile(overlayTile);
+                            //AudioManager.Instance.PlayRandomVillagerIdleOnSpawn();
+                            villagerPlaced = true;
+                        }
+                    }
+                }
+
+                else if (Input.GetMouseButton(0) && villagerButtonClicked)
+                {
+                    if (villagerPlaced)
+                    {
+                        if (overlayTile == villager.activeTile)
+                        {
+                            Debug.Log("Destroy");
+                            Destroy(villager.gameObject);
+                            //AudioManager.Instance.PlayVillagerDeath();
+                            villagerPlaced = false;
+                        }
+                    }
+                }
+                #endregion
+
+            }
+            else
+            {
+                // disable cursor sprite once cursor is outside tiles
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }
@@ -72,5 +128,12 @@ public class MouseController : MonoBehaviour
             return hits.OrderByDescending(i => i.collider.transform.position.z).First();
         }
         return null;
+    }
+
+    public void PositionCharacterOnTile(OverlayTile tile)
+    {
+        villager.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y - 0.05f, tile.transform.position.z+1);
+        villager.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        villager.activeTile = tile;
     }
 }

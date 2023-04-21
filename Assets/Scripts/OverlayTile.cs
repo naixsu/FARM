@@ -18,7 +18,7 @@ public class OverlayTile : MonoBehaviour
 
 
     [SerializeField] private Sprite overlayTile;
-    /*[SerializeField] private Sprite plantedSprite;
+    [SerializeField] private Sprite plantedSprite;
     [SerializeField] private Sprite blocked;
     [SerializeField] private Sprite grass;
     [SerializeField] private Sprite till;
@@ -26,7 +26,7 @@ public class OverlayTile : MonoBehaviour
     [SerializeField] private Sprite growth2;
     [SerializeField] private Sprite growth3;
     [SerializeField] private Sprite growth4;
-    [SerializeField] private Sprite harvested;*/
+    [SerializeField] private Sprite harvested;
 
     public float plantGrowthTimer;
     public bool isTilled;
@@ -44,15 +44,15 @@ public class OverlayTile : MonoBehaviour
         }
     }
 
-    /*public void CalculateFCost()
+    public void CalculateFCost()
     {
         _F = _G + _H;
-    }*/
+    }
 
     //
     // pretty self explanatory stuff here
     // 
-    /*public void PlantSeed()
+    public void PlantSeed()
     {
         if (!hasSeed)
         {
@@ -64,9 +64,9 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Planted seed at tile " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             // AudioManager.Instance.PlayRandomPlant();
         }
-    }*/
+    }
 
-    /*public void HarvestCrop()
+    public void HarvestCrop()
     {
         if (isFullGrown)
         {
@@ -75,9 +75,9 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Harvested crop at tile " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             // AudioManager.Instance.PlayHarvest();
         }
-    }*/
+    }
 
-    /*public IEnumerator PlantGrowth()
+    public IEnumerator PlantGrowth()
     {
         yield return new WaitForSeconds(plantGrowthTimer);
         this.GetComponent<SpriteRenderer>().sprite = growth1;
@@ -88,7 +88,7 @@ public class OverlayTile : MonoBehaviour
         yield return new WaitForSeconds(plantGrowthTimer);
         this.GetComponent<SpriteRenderer>().sprite = growth4;
         this.isFullGrown = true;
-    }*/
+    }
 
     public void ShowTile(float alpha)
     {
@@ -113,7 +113,7 @@ public class OverlayTile : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
 
-    /*public void TillTile(bool rand)
+    public void TillTile(bool rand)
     {
         if (!isTilled)
         {
@@ -121,11 +121,11 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Tilled tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = till;
             this.ShowTile(1f);
-            if (!rand) AudioManager.Instance.PlayRandomTillTile();
-        }     
-    }*/
+            //if (!rand) AudioManager.Instance.PlayRandomTillTile();
+        }
+    }
 
-    /*public void BlockTile(bool rand)
+    public void BlockTile(bool rand)
     {
         if (!isBlocked)
         {
@@ -133,22 +133,22 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Blocked tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = blocked;
             this.ShowTile(1f);
-            if (!rand) AudioManager.Instance.PlayRandomPlaceBlock();
+            //if (!rand) AudioManager.Instance.PlayRandomPlaceBlock();
         }
-    }*/
+    }
 
-    /*public void UnblockTile(bool rand)
+    public void UnblockTile(bool rand)
     {
         if (isBlocked)
         {
             this.isBlocked = false;
             Debug.Log("Unblocked tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = grass;
-            if (!rand) AudioManager.Instance.PlayRandomBreakBlock();
+            //if (!rand) AudioManager.Instance.PlayRandomBreakBlock();
         }
-    }*/
+    }
 
-    /*public void UntillTile(bool rand)
+    public void UntillTile(bool rand)
     {
         if (isTilled)
         {
@@ -156,7 +156,7 @@ public class OverlayTile : MonoBehaviour
             Debug.Log("Untilled tile at " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
             this.GetComponent<SpriteRenderer>().sprite = grass;
             this.HideTile();
-            if (!rand) AudioManager.Instance.PlayRandomUnTillTile();
+            //if (!rand) AudioManager.Instance.PlayRandomUnTillTile();
         }
-    }*/
+    }
 }
