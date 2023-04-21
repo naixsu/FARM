@@ -24,17 +24,28 @@ public class RangeFinder
         {
             var neighborTiles = new List<OverlayTile>();
 
-            foreach ( var neighborTile in tileForPreviousStep)
+            foreach (var neighborTile in inRangeTiles)
             {
                 neighborTiles.AddRange(MapManager.Instance.NewOrderGetNeighborTiles(neighborTile));
             }
 
             inRangeTiles.AddRange(neighborTiles);
-            tileForPreviousStep = neighborTiles.Distinct().ToList();
+            // tileForPreviousStep = neighborTiles.Distinct().ToList();
+            inRangeTiles = inRangeTiles.Distinct().ToList();
+            PrintInrange(inRangeTiles);
             stepCount++;
         }
 
         // return a list of distinct tiles
         return inRangeTiles.Distinct().ToList();
+    }
+
+    void PrintInrange(List<OverlayTile> inRangeTiles)
+    {
+        Debug.Log("Printing Tiles");
+        foreach (var tile in inRangeTiles)
+        {
+            Debug.Log(tile.grid2DLocation);
+        }
     }
 }
