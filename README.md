@@ -1,6 +1,5 @@
-# Isometric version of F.A.R.M. 
+# Isometric version of [F.A.R.M.](https://github.com/naixsu/CMSC170)
 
-#### Link to the original [here](https://github.com/naixsu/CMSC170)
 Backend is basically the same from the original, only difference is that it's now isometric *wooooahhh*.
 
 ## Play the game [here](https://naixsu.itch.io/farm-v2?secret=PsuNLwegE5psZ7PzkxgX45KOM).
