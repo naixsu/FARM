@@ -76,7 +76,7 @@ public class MouseController : MonoBehaviour
         {
             villager.seeds = seeds;
         }
-        // seedCountScript.seedValue = seeds;
+        seedCountScript.seedValue = seeds;
 
         if (mouseControl)
         {

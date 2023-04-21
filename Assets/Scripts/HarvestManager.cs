@@ -62,7 +62,7 @@ public class HarvestManager : MonoBehaviour
         rangeFinder = new RangeFinder();
         grownTiles = mouseController.toHarvest;
         map = MapManager.Instance.map;
-        //seedCountScript.seedValue = villager.seeds;
+        seedCountScript.seedValue = villager.seeds;
 
 
         // start range detection
@@ -75,7 +75,7 @@ public class HarvestManager : MonoBehaviour
         {
             villager.plantingState = false;
             villager.harvestingState = true;
-            //cropCountScript.cropValue = villager.crops;
+            cropCountScript.cropValue = villager.crops;
             CheckHarvest();
             CheckMove();
         }

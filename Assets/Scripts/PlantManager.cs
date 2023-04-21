@@ -59,7 +59,7 @@ public class PlantManager : MonoBehaviour
         pathFinder = new PathFinder();
         rangeFinder = new RangeFinder();
         tilledTiles = mouseController.tilledTiles;
-        //cropCountScript.cropValue = villager.crops;
+        cropCountScript.cropValue = villager.crops;
 
         // start range detection
         GetInRangeTiles();
@@ -74,7 +74,7 @@ public class PlantManager : MonoBehaviour
         if (plantingState)
         {
             villager.plantingState = true;
-            //seedCountScript.seedValue = villager.seeds;
+            seedCountScript.seedValue = villager.seeds;
             CheckPlant();
             CheckMove();
         }
