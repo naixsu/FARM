@@ -15,9 +15,9 @@ Backend is basically the same from the original, only difference is that it's no
 - [My prized possession](https://raw.githubusercontent.com/naixsu/FARM/main/Assets/Sprites/credits.png).
 - Other images from Google Images.
 
+### By no means is my code optimized. Almost everything is spaghetti code :D
+---
 ### Let him cook
-
-
 ![lethimcook](https://user-images.githubusercontent.com/95230510/233659723-8c279b95-d463-4891-9699-2858d8925938.jpg)
 
 ~~*Mostly*~~ spam listened to this song while coding.....*again*.
