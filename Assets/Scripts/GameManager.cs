@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private MouseController mouseController;
     [SerializeField] private PlantManager plantManager;
+    [SerializeField] private HarvestManager harvestManager;
 
     private void Awake()
     {
@@ -98,13 +99,15 @@ public class GameManager : MonoBehaviour
     private void HandleHarvestSeeds()
     {
         Debug.Log("GM: Harvesting Seeds");
-        /*harvestManager.gameObject.SetActive(true);
-        plantManager.gameObject.SetActive(false);*/
+        harvestManager.gameObject.SetActive(true);
+        plantManager.gameObject.SetActive(false);
     }
 
     private void HandleGameOver()
     {
         Debug.Log("GM: Game Over");
+        harvestManager.gameObject.SetActive(false);
+        plantManager.gameObject.SetActive(false);
         /*gameOver.gameObject.SetActive(true);
         harvestManager.gameObject.SetActive(false);
         plantManager.gameObject.SetActive(false);*/
