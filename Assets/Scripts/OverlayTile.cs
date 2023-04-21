@@ -55,7 +55,7 @@ public class OverlayTile : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = plantedSprite;
             coroutinePlantGrowth = StartCoroutine(PlantGrowth());
             Debug.Log("Planted seed at tile " + this.gameObject.transform.position.x + " " + this.gameObject.transform.position.y);
-            AudioManager.Instance.PlayRandomPlant();
+            //AudioManager.Instance.PlayRandomPlant();
         }
     }
 

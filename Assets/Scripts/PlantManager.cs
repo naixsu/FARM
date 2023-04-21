@@ -195,7 +195,13 @@ public class PlantManager : MonoBehaviour
     {
         // if the there is still a path from the pathfinding algo,
         // move towards the end tile
-        if (path.Count > 0)
+        if (tileFound && path == null)
+        {
+            StartCoroutine(GameOver());
+        }
+        if (path == null) return;
+
+        else if (path.Count > 0 && path != null)
         {
             MoveAlongPath();
             isMoving = true;
