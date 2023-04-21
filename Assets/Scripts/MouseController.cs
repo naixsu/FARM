@@ -253,6 +253,7 @@ public class MouseController : MonoBehaviour
             _hoeButton.GetComponent<Image>().sprite = hoeSelected;
             _villagerButton.GetComponent<Image>().sprite = defaultVillager;
             _pickaxeButton.GetComponent<Image>().sprite = defaultPickaxe;
+            _randomizeButton.GetComponent<Image>().sprite = defaultRandomizeButton;
         }
 
         if (pickaxeButtonClicked)
@@ -260,6 +261,7 @@ public class MouseController : MonoBehaviour
             _hoeButton.GetComponent<Image>().sprite = defaultHoe;
             _villagerButton.GetComponent<Image>().sprite = defaultVillager;
             _pickaxeButton.GetComponent<Image>().sprite = pickaxeSelected;
+            _randomizeButton.GetComponent<Image>().sprite = defaultRandomizeButton;
         }
 
         if (villagerButtonClicked)
@@ -267,6 +269,7 @@ public class MouseController : MonoBehaviour
             _hoeButton.GetComponent<Image>().sprite = defaultHoe;
             _villagerButton.GetComponent<Image>().sprite = villagerSelected;
             _pickaxeButton.GetComponent<Image>().sprite = defaultPickaxe;
+            _randomizeButton.GetComponent<Image>().sprite = defaultRandomizeButton;
         }
     }
 
@@ -342,6 +345,7 @@ public class MouseController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         randomizeButtonClicked = false;
+        Debug.Log("Resetting");
         _randomizeButton.GetComponent<Image>().sprite = defaultRandomizeButton;
     }
     private void RandomVillager()
