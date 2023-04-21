@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnStateChange;
 
     [SerializeField] private MouseController mouseController;
+    [SerializeField] private PlantManager plantManager;
 
     private void Awake()
     {
@@ -87,10 +88,10 @@ public class GameManager : MonoBehaviour
     private void HandlePlantSeeds()
     {
         Debug.Log("GM: Planting Seeds");
-        /*mouseController.gameObject.SetActive(false);
-        instructions.gameObject.SetActive(false);
-        buttons.SetActive(false);
-        plantManager.gameObject.SetActive(true);*/
+        mouseController.gameObject.SetActive(false);
+        //instructions.gameObject.SetActive(false);
+        //buttons.SetActive(false);
+        plantManager.gameObject.SetActive(true);
 
     }
 

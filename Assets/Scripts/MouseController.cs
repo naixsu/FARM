@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MouseController : MonoBehaviour
 {
-    private bool mouseControl;
+    public bool mouseControl;
 
     public GameObject villagerPrefab;
     public VillagerInfo villager;
@@ -69,16 +69,14 @@ public class MouseController : MonoBehaviour
         map = MapManager.Instance.map;
         seeds = 0;
     }
-
-    
-
-
-
-
-
     private void Update()
     {
         ButtonClick();
+        if (villagerPlaced)
+        {
+            villager.seeds = seeds;
+        }
+        // seedCountScript.seedValue = seeds;
 
         if (mouseControl)
         {
@@ -297,6 +295,7 @@ public class MouseController : MonoBehaviour
         // updates GameState to PlantSeeds if there are one or more tilled tiles in the screen
         if (tilledTiles.Count > 0 && villagerPlaced)
         {
+            mouseControl = false;
             GameManager.instance.UpdateGameState(GameManager.GameState.PlantSeeds);
         }
 
